@@ -149,6 +149,8 @@ vertical slides."
   '((headline                   .       org-ioslide-headline)
     (section                    .       org-ioslide-section)
     (template                   .       org-ioslide-template)
+    (left-block                 .       org-ioslide-left-block)
+    (right-block                .       org-ioslide-right-block)
     (center-block               .       org-ioslide-center-block)
     (src-block                  .       org-ioslide-src-block)
     (quote-block                .       org-ioslide-quote-block)
@@ -290,6 +292,22 @@ else get value from custom variable `org-ioslide-hlevel'."
   (let ((hlevel-str (plist-get info :hlevel)))
     (if hlevel-str (string-to-number hlevel-str)
       org-ioslide-hlevel)))
+
+;;;; Right Block
+(defun org-ioslide-right-block (right-block contents info)
+  "Transcode a RIGHT-BLOCK element from Org to HTML.
+CONTENTS holds the contents of the block.  INFO is a plist
+holding contextual information."
+  (format
+   "<article class=\"flexbox vright\">\n%s</article>" contents))
+
+;;;; Left Block
+(defun org-ioslide-left-block (left-block contents info)
+  "Transcode a LEFT-BLOCK element from Org to HTML.
+CONTENTS holds the contents of the block.  INFO is a plist
+holding contextual information."
+  (format
+   "<article class=\"flexbox vleft\">\n%s</article>" contents))
 
 ;;;; Center Block
 (defun org-ioslide-center-block (center-block contents info)
